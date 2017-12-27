@@ -19,4 +19,6 @@ Now go to the `html/build/` directory and locate the folder called `dist`. Zip t
 
 **Note** - Building a HTML dist is *slow*. During development, you should use `./gradlew html:superDev` which allows you to debug your code directly in the browser. More information about this is available on the [libGDX Wiki](https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#running-the-html-project).
 
+---
+
 Created by [halfcutdev](https://github.com/halfcutdev)
