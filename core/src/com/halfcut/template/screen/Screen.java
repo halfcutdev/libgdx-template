@@ -34,8 +34,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     @Override
     public void render(float delta) {
-        update(delta * 60);
         draw(app.sb, app.sr);
+        update(delta * 60);
     }
 
     @Override

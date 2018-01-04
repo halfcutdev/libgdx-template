@@ -63,7 +63,7 @@ public class LoadingScreen extends Screen {
 
         // Reset the camera's projection matrix.
         Matrix4 uiMatrix = camera.combined.cpy();
-        uiMatrix.setToOrtho2D(0, 0, App.WIDTH * App.SCALE, App.HEIGHT * App.SCALE);
+        uiMatrix.setToOrtho2D(0, 0, App.WIDTH, App.HEIGHT);
         sr.setProjectionMatrix(uiMatrix);
         sb.setProjectionMatrix(uiMatrix);
 
