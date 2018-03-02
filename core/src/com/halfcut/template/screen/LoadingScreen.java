@@ -40,7 +40,8 @@ public class LoadingScreen extends Screen {
         // Initialise specialised loaders.
         assets = new AssetManager();
         assets.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-
+        assets.load("packed/textures.atlas", TextureAtlas.class);
+        
         /**
          * Load everything here...
          */
