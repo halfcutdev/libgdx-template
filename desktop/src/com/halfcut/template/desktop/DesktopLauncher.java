@@ -9,22 +9,23 @@ import static com.halfcut.template.App.*;
 
 public class DesktopLauncher {
 
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+    public static void main (String[] arg) {
+	LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-		config.title  = TITLE;
-		config.width  = WIDTH  * SCALE;
-		config.height = HEIGHT * SCALE;
-		config.resizable = false;
+	config.title  = TITLE;
+	config.width  = WIDTH  * SCALE;
+	config.height = HEIGHT * SCALE;
+	config.resizable = false;
 
-		TexturePacker.Settings settings = new TexturePacker.Settings();
-		settings.maxWidth = 1024;
-		settings.maxHeight = 1024;
-		TexturePacker.process(settings, "sprites", "packed", "textures");
+	TexturePacker.Settings settings = new TexturePacker.Settings();
+	settings.maxWidth   = 1024;
+	settings.maxHeight  = 1024;
+	settings.useIndexes = false;
+	TexturePacker.process(settings, "sprites", "packed", "textures");
 
-		App.mode = Mode.DESKTOP;
+	App.mode = Mode.DESKTOP;
 
-		new LwjglApplication(new App(), config);
-	}
+	new LwjglApplication(new App(), config);
+    }
 
 }
