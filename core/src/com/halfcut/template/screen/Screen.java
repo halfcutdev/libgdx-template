@@ -1,19 +1,20 @@
 package com.halfcut.template.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.halfcut.template.App;
 import com.halfcut.template.util.Shader;
 
 import static com.halfcut.template.App.HEIGHT;
+import static com.halfcut.template.App.SCALE;
 import static com.halfcut.template.App.WIDTH;
 
 /**
@@ -52,8 +53,39 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     @Override
     public void render(float delta) {
-        draw(app.sb, app.sr);
         update(delta * 60);
+
+        sceneFrameBuffer.begin();
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
+            float sceneX = sceneCamera.position.x;
+            float sceneY = sceneCamera.position.y;
+            float sceneXI = MathUtils.floor(sceneX);
+            float sceneYI = MathUtils.floor(sceneY);
+            float upscaleOffsetX = (sceneX - sceneXI) * SCALE;
+            float upscaleOffsetY = (sceneY - sceneYI) * SCALE;
+            float subpixelX = upscaleOffsetX - MathUtils.floor(upscaleOffsetX);
+            float subpixelY = upscaleOffsetY - MathUtils.floor(upscaleOffsetY);
+            upscaleOffsetX -= subpixelX;
+            upscaleOffsetY -= subpixelY;
+
+            sceneCamera.position.set(sceneXI, sceneYI, 0.0f);
+            sceneCamera.update();
+            draw(app.sb, app.sr);
+        sceneFrameBuffer.end();
+
+        app.sb.begin();
+            app.sb.setProjectionMatrix(viewportCamera.combined);
+            pixelShader.setUniformf("u_textureSizes", WIDTH, HEIGHT, SCALE, 0.0f);
+            pixelShader.setUniformf("u_sampleProperties", subpixelX, subpixelY, upscaleOffsetX, upscaleOffsetY);
+            app.sb.draw(sceneFrameBuffer.getColorBufferTexture(), (SCALE * WIDTH - WIDTH) / 2, (SCALE * HEIGHT - HEIGHT) / 2, WIDTH, HEIGHT,0, 0, 1f, 1f);
+        app.sb.end();
+
+        app.sb.setShader(null);
+        HdpiUtils.glScissor(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
     }
 
     @Override
