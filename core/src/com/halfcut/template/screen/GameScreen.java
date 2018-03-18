@@ -36,8 +36,6 @@ public class GameScreen extends Screen {
 
         // Draw box.
         sr.begin(ShapeRenderer.ShapeType.Filled);
-            sr.setColor(Color.GREEN);
-            sr.rect(0, 0, WIDTH, HEIGHT);
             sr.setColor(Color.PINK);
             sr.rect(boxX, boxY, boxSize * 0.5f, boxSize * 0.5f, boxSize, boxSize, 1, 1, boxTheta);
         sr.end();
