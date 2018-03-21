@@ -24,11 +24,11 @@ import static com.halfcut.template.App.WIDTH;
 public abstract class Screen implements com.badlogic.gdx.Screen {
 
     protected App app;
-    protected Viewport viewport;
-    protected FrameBuffer sceneFrameBuffer;
-    protected OrthographicCamera sceneCamera;
-    protected OrthographicCamera viewportCamera;
-    protected ShaderProgram pixelShader = Shader.PIXEL;
+    private Viewport viewport;
+    private FrameBuffer sceneFrameBuffer;
+    private OrthographicCamera sceneCamera;
+    private OrthographicCamera viewportCamera;
+    private ShaderProgram pixelShader = Shader.PIXEL;
 
     abstract public void update(float delta);
     abstract public void draw(SpriteBatch sb, ShapeRenderer sr);

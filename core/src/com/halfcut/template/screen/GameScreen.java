@@ -31,8 +31,8 @@ public class GameScreen extends Screen {
 
     @Override
     public void draw(SpriteBatch sb, ShapeRenderer sr) {
-        sb.setProjectionMatrix(sceneCamera.combined);
-        sr.setProjectionMatrix(sceneCamera.combined);
+        sb.setProjectionMatrix(getSceneCamera().combined);
+        sr.setProjectionMatrix(getSceneCamera().combined);
 
         // Draw box.
         sr.begin(ShapeRenderer.ShapeType.Filled);
