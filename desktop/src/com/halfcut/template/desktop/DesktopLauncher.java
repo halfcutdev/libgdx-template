@@ -21,6 +21,7 @@ public class DesktopLauncher {
 	    settings.maxWidth   = 1024;
 	    settings.maxHeight  = 1024;
 	    settings.useIndexes = false;
+        settings.combineSubdirectories = true;
 	    settings.bleed = true;
 	    settings.paddingX = 1;
 	    settings.paddingY = 1;

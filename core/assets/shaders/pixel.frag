@@ -11,8 +11,7 @@ uniform sampler2D u_texture;
 uniform vec4 u_textureSizes;
 uniform vec4 u_sampleProperties;
 
-void main()
-{
+void main() {
     vec2 uv = v_texCoords;
     vec2 uvSize = u_textureSizes.xy;
 
