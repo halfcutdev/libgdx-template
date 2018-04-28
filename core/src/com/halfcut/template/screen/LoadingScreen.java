@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Matrix4;
 import com.halfcut.template.App;
 import com.halfcut.template.assets.Assets;
+import com.halfcut.template.util.Palette;
 
 /**
  * @author halfcutdev
@@ -25,7 +26,7 @@ public class LoadingScreen extends Screen {
     static final public int BAR_HEIGHT       =  2;
     static final public int BORDER_GAP       =  1;
     static final public int BORDER_THICKNESS =  1;
-    static final public Color BACKGROUND_COLOUR = Color.BLACK.cpy();
+    static final public Color BACKGROUND_COLOUR = Palette.INK.cpy();
 
     private AssetManager assets;
     private boolean loaded;
@@ -49,7 +50,7 @@ public class LoadingScreen extends Screen {
             Assets.get().provide(assets);
             if(!loaded) {
                 loaded = true;
-                app.setScreen(new GameScreen(app));
+                transitionToScreen(new GameScreen(app));
             }
         }
     }

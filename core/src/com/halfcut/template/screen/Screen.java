@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.halfcut.template.App;
+import com.halfcut.template.screen.transition.TransitionScreen;
+import com.halfcut.template.util.Palette;
 import com.halfcut.template.util.Shader;
 
 import static com.halfcut.template.App.HEIGHT;
@@ -56,7 +58,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         update(delta * 60);
 
         sceneFrameBuffer.begin();
-            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClearColor(Palette.INK.r, Palette.INK.g, Palette.INK.b, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -88,6 +90,10 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         HdpiUtils.glScissor(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
     }
 
+    public void transitionToScreen(Screen next) {
+        app.setScreen(new TransitionScreen(app, this, next));
+    }
+
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
@@ -106,10 +112,11 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     }
 
     // Unused
-    public void pause() {}
-    public void resume() {}
-    public void show() {}
-    public void hide() {}
+    public void init()    {}
+    public void pause()   {}
+    public void resume()  {}
+    public void show()    {}
+    public void hide()    {}
     public void dispose() {}
 
 }

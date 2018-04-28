@@ -14,7 +14,7 @@ import static com.halfcut.template.App.HEIGHT;
  */
 public class GameScreen extends Screen {
 
-    // Floating box example.
+    // Spinning box example.
     private float boxSize  = 10;
     private float boxX     = (WIDTH  - boxSize) / 2;
     private float boxY     = (HEIGHT - boxSize) / 2;
@@ -34,7 +34,7 @@ public class GameScreen extends Screen {
         sb.setProjectionMatrix(getSceneCamera().combined);
         sr.setProjectionMatrix(getSceneCamera().combined);
 
-        // Draw box.
+        // Draw the box
         sr.begin(ShapeRenderer.ShapeType.Filled);
             sr.setColor(Color.PINK);
             sr.rect(boxX, boxY, boxSize * 0.5f, boxSize * 0.5f, boxSize, boxSize, 1, 1, boxTheta);
